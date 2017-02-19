@@ -1911,8 +1911,10 @@ static void mkdir(const wstring& path)
         if (att != INVALID_FILE_ATTRIBUTES || (att & FILE_ATTRIBUTE_DIRECTORY) != 0)
             return; // ok
     }
+    RuntimeError("mkdir: error creating intermediate directory %ls, errno=%d, atttibute=%x", path.c_str(), errno, ::GetFileAttributesW(path.c_str()));
+#else
+    RuntimeError("mkdir: error creating intermediate directory %ls, errno=%d", path.c_str(), errno);
 #endif
-    RuntimeError("mkdir: error creating intermediate directory %ls", path.c_str());
 }
 
 // make subdir of a file including parents
