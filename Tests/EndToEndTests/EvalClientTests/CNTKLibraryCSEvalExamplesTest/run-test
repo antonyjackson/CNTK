@@ -28,15 +28,13 @@ fi
 # Copy the test data to the test run directory
 TestDataDir=$TEST_RUN_DIR/TestData
 mkdir $TestDataDir
-ModelOutputDir=$TestDataDir/ModelOutput
-mkdir $ModelOutputDir
 
 # Train resnet cifar model and atis model
-python train_models_for_evaluation.py -o $ModelOutputDir || exit $?
+python train_models_for_evaluation.py -o $TestDataDir || exit $?
 
-mv $ModelOutputDir/resnet20_0.dnn $TestdataDir/resnet20.dnn || exit $?
-mv $ModelOutputDirr/data/train/* $TestdataDir || exit $?
-mv $ModelOutputDir/Models/atis_0.dnn $TestdataDir/atis.dnn || exit $?
+mv $TestDataDir/resnet20_0.dnn $TestdataDir/resnet20.dnn || exit $?
+mv $TestDataDir/data/train/* $TestdataDir || exit $?
+mv $TestDataDir/Models/atis_0.dnn $TestdataDir/atis.dnn || exit $?
 cp $TEST_ROOT_DIR/../../Examples/LanguageUnderstanding/ATIS/BrainScript/query.wl $TestdataDir || exit $?
 cp $TEST_ROOT_DIR/../../Examples/LanguageUnderstanding/ATIS/BrainScript/slots.wl $TestdataDir || exit $?
 
